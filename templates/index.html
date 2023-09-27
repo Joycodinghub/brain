@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="content">
+        <h1>Welcome to Our Website</h1>
+        <p>Enhancing Early Cancer Detection through Machine Learning: A Data-Driven Approach
+        </p>
+        <h1>Upload an Image</h1>
+        <form action="/" method="POST" enctype="multipart/form-data" id="updimg">
+            <input type="file" name="image" accept="image/*" id="input" required>
+            <button type="submit">Upload and Detect</button>
+        </form>
+        <h2>Image Uploaded .. </h2>
+        <img src="" id="imgupd">
+    </section>
+
+    <script>
+
+        const imgfrom = document.getElementById('updimg');
+        const imginput = document.getElementById('input');
+        const updimg = document.getElementById('imgupd');
+
+        imgfrom.addEventListener("change", function (a) {
+            a.preventDefault();
+            const file = imginput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (a) {
+                    updimg.src = a.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+
+</html>
